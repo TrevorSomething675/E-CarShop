@@ -10,6 +10,6 @@
         public RoleEntity Role { get; set; }
 
         public List<CarEntity> Cars { get; set; }
-        public List<NotificationEntity>? Notifications { get; set; }
+        public List<NotificationEntity> Notifications { get; set; }
     }
 }

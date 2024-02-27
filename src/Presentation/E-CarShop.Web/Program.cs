@@ -1,6 +1,6 @@
 using NLog.Web;
 
-namespace E_CarShop
+namespace E_CarShop.Web
 {
     public class Program
     {
@@ -8,7 +8,7 @@ namespace E_CarShop
         {
             CreateHostBuilder(args).Build().Run();
         }
-    
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
