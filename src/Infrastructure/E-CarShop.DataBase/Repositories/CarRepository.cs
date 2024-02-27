@@ -13,12 +13,14 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public Task<Car> CreateAsync(Car car)
+        public async Task<Car> CreateAsync(Car car)
         {
             using (var context = _dbContextFactory.CreateDbContext())
             {
                 var carEntity = _mapper.Map<CarEntity>(car);
-                context.
+                var result = context.Cars.Add(carEntity);
+                await context.SaveChangesAsync();
+                return _mapper.Map<Car>(result.Entity);
             }
         }
         public Task<Car> DeleteByIdAsync(int id)

@@ -6,18 +6,21 @@ using E_CarShop.DataBase.Entities;
 
 namespace E_CarShop.DataBase
 {
-    public class MainContext(IOptions<DataBaseOptions> options) : DbContext
+    public class MainContext(IOptions<DataBaseOptions> dataBaseOptions) : DbContext
     {
-        private readonly DataBaseOptions _options = options.Value;
+        private readonly DataBaseOptions _dataBaseOptions = dataBaseOptions.Value;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_options.ConnectionString);
+            optionsBuilder.UseNpgsql(_dataBaseOptions.ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BrandEntityConfiguration());
             modelBuilder.ApplyConfiguration(new CarEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ImageEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
         }
         public DbSet<BrandEntity> Brands { get; set; }
         public DbSet<CarEntity> Cars { get; set; }

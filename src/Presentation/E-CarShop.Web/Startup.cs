@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using E_CarShop.Core.ConfigurationModels;
+using E_CarShop.DataBase;
+using System.Reflection;
 
 namespace E_CarShop.Web
 {
@@ -6,6 +8,9 @@ namespace E_CarShop.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+            services.Configure<DataBaseOptions>(configuration.GetSection(DataBaseOptions.SectionName));
+            services.AddDbContextFactory<MainContext>();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
             services.AddMvc();
         }

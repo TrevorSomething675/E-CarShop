@@ -13,8 +13,7 @@ namespace E_CarShop.DataBase.Configurations
             builder.HasKey(c => c.Id);
 
             builder.HasMany(c => c.Users)
-                .WithMany(u => u.Cars)
-                .UsingEntity("UserCar");
+                .WithMany(u => u.Cars);
         }
     }
 }

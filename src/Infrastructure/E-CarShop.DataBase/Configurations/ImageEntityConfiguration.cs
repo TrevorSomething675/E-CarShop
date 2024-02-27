@@ -13,7 +13,9 @@ namespace E_CarShop.DataBase.Configurations
             builder.HasKey(i => i.Id);
 
             builder.HasOne(i => i.Car)
-                .WithMany(c => c.Images);
+                .WithMany(c => c.Images)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired(true);
         }
     }
 }

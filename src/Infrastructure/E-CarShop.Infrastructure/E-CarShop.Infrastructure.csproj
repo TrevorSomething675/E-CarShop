@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\E-CarShop.Application\E-CarShop.Application.csproj" />
+    <ProjectReference Include="..\E-CarShop.DataBase\E-CarShop.DataBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>
