@@ -8,9 +8,9 @@
         public string Description { get; set; }
         public int Price { get; set; }
 
-        public List<ImageEntity> Images { get; set; }
-        public List<UserEntity> Users { get; set; }
-        public int ModelId { get; set; }
+        public IEnumerable<ImageEntity> Images { get; set; }
+        public IEnumerable<UserEntity> Users { get; set; }
+        public int BrandId { get; set; }
         public BrandEntity Brand { get; set; }
     }
 }

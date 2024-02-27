@@ -1,8 +1,8 @@
 ﻿namespace E_CarShop.DataBase.Entities
 {
-    public class BrandEntity
+    public class BrandEntity : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<CarEntity> Cars { get; set; }
+        public IEnumerable<CarEntity> Cars { get; set; }
     }
 }

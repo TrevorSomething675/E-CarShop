@@ -9,7 +9,7 @@
         public int RoleId { get; set; }
         public RoleEntity Role { get; set; }
 
-        public List<CarEntity> Cars { get; set; }
-        public List<NotificationEntity> Notifications { get; set; }
+        public IEnumerable<CarEntity> Cars { get; set; }
+        public IEnumerable<NotificationEntity> Notifications { get; set; }
     }
 }
