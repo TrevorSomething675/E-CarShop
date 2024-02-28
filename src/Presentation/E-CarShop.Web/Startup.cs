@@ -38,6 +38,7 @@ namespace E_CarShop.Web
                         Name = "Brand-1"
                     }
                 };
+
                 context.Brands.AddRange(brands);
                 context.Roles.AddRange(roles);
                 context.SaveChanges();
@@ -50,7 +51,20 @@ namespace E_CarShop.Web
                         IsVisible = true,
                         Description = "car-1-description",
                         Price = 1000,
-                        Brand = context.Brands.FirstOrDefault()
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "path-1"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "path-2"
+                            }
+                        }
                     },
                     new CarEntity
                     {

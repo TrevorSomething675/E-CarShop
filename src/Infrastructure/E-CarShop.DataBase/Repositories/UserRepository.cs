@@ -1,5 +1,6 @@
 ﻿using E_CarShop.Application.Repositories;
 using Microsoft.EntityFrameworkCore;
+using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
 
@@ -33,17 +34,43 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<List<User>>(userEntities);
             }
         }
-        public Task<User> CreateAsync(User car)
+        public async Task<User> CreateAsync(User car)
         {
-            throw new NotImplementedException();
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var userEntity = _mapper.Map<UserEntity>(car);
+                var result = context.Users.Add(userEntity);
+                await context.SaveChangesAsync();
+
+                return _mapper.Map<User>(result.Entity);
+            }
         }
-        public Task<User> UpdateAsync(User car)
+        public async Task<User> UpdateAsync(User car)
         {
-            throw new NotImplementedException();
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var userToUpdateEntity = _mapper.Map<UserEntity>(car);
+                var userEntity = context.Users
+                    .FirstOrDefault(u => u.Id == userToUpdateEntity.Id);
+
+                context.Entry(userEntity).CurrentValues.SetValues(userToUpdateEntity);
+                var result = context.Users.Update(userEntity);
+                await context.SaveChangesAsync();
+
+                return _mapper.Map<User>(result.Entity);
+            }
         }
-        public Task<User> DeleteByIdAsync(int id)
+        public async Task<User> DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var userEntity = context.Users
+                    .FirstOrDefault(u => u.Id == id);
+                var result = context.Users.Remove(userEntity);
+                await context.SaveChangesAsync();
+
+                return _mapper.Map<User>(result.Entity);
+            }
         }
     }
 }

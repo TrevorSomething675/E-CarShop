@@ -1,6 +1,7 @@
 ﻿using E_CarShop.Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using E_CarShop.Core.Models;
 
 namespace E_CarShop.Web.Controllers
 {
@@ -32,9 +33,12 @@ namespace E_CarShop.Web.Controllers
         public async Task<IActionResult> Update()
         {
             var car = (await _carRepository.GetCarsAsync()).FirstOrDefault();
-            //var user = (await _userRepository.GetUsersAsync()).FirstOrDefault();
-            //car.Users.Add(user);
-            car.IsVisible = false;
+            var image = new Image
+            {
+                Name = "jfiads",
+                Path = "fsdf"
+            };
+            car.Images.Add(image);
             var result = await _carRepository.UpdateAsync(car);
             return Ok(result);
         }

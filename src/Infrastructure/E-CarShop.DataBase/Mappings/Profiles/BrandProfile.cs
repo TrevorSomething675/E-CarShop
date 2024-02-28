@@ -1,6 +1,6 @@
-﻿using AutoMapper;
+﻿using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
-using E_CarShop.DataBase.Entities;
+using AutoMapper;
 
 namespace E_CarShop.DataBase.Mappings.Profiles
 {
@@ -8,7 +8,7 @@ namespace E_CarShop.DataBase.Mappings.Profiles
     {
         public BrandProfile() 
         {
-            CreateMap<Car, CarEntity>().ReverseMap();
+            CreateMap<Brand, BrandEntity>().ReverseMap();
         }
     }
 }

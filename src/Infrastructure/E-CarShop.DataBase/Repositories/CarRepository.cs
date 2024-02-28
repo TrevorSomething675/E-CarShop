@@ -28,6 +28,7 @@ namespace E_CarShop.DataBase.Repositories
             using(var context = _dbContextFactory.CreateDbContext())
             {
                 var carEntities = await context.Cars
+                    .Include(c => c.Images)
                     .AsNoTracking()
                     .Skip(8 * (pageNumber - 1))
                     .Take(8 * pageNumber)
@@ -47,17 +48,23 @@ namespace E_CarShop.DataBase.Repositories
         }
         public async Task<Car> UpdateAsync(Car car)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            using (var context = _dbContextFactory.CreateDbContext())
             {
                 var carEntityToUpdate = _mapper.Map<CarEntity>(car);
                 var carEntity = await context.Cars
-                    .Include(c => c.Brand)
                     .Include(c => c.Images)
+                    .Include(c => c.Brand)
                     .Include(c => c.Users)
                     .FirstOrDefaultAsync(c => c.Id == car.Id);
-                context.Entry(carEntity).OriginalValues.SetValues(carEntityToUpdate);
+                context.Entry(carEntity).CurrentValues.SetValues(carEntityToUpdate);
+
+                if (car.Images != null)
+                    carEntity.Images = carEntityToUpdate.Images;
+
+                var result = context.Cars.Update(carEntity);
                 await context.SaveChangesAsync();
-                return _mapper.Map<Car>(carEntity);
+
+                return _mapper.Map<Car>(result.Entity);
             }
         }
         public async Task<Car> DeleteByIdAsync(int id)
