@@ -3,6 +3,6 @@
     public class RoleEntity : BaseEntity
     {
         public string Name { get; set; }
-        public IEnumerable<UserEntity> Users { get; set; }
+        public List<UserEntity> Users { get; set; }
     }
 }

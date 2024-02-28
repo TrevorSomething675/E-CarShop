@@ -1,8 +1,8 @@
 ﻿using E_CarShop.Application.Repositories;
 using Microsoft.EntityFrameworkCore;
+using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
-using E_CarShop.DataBase.Entities;
 
 namespace E_CarShop.DataBase.Repositories
 {
@@ -13,6 +13,28 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
+        public async Task<Car> GetByIdAsync(int id)
+        {
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var carEntity = context.Cars
+                    .AsNoTracking()
+                    .FirstOrDefault();
+                return _mapper.Map<Car>(carEntity);
+            }
+        }
+        public async Task<List<Car>> GetCarsAsync(int pageNumber = 1)
+        {
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var carEntities = await context.Cars
+                    .AsNoTracking()
+                    .Skip(8 * (pageNumber - 1))
+                    .Take(8 * pageNumber)
+                    .ToListAsync();
+                return _mapper.Map<List<Car>>(carEntities);
+            }
+        }
         public async Task<Car> CreateAsync(Car car)
         {
             using (var context = _dbContextFactory.CreateDbContext())
@@ -23,21 +45,33 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<Car>(result.Entity);
             }
         }
-        public Task<Car> DeleteByIdAsync(int id)
+        public async Task<Car> UpdateAsync(Car car)
         {
-            throw new NotImplementedException();
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var carEntityToUpdate = _mapper.Map<CarEntity>(car);
+                var carEntity = await context.Cars
+                    .Include(c => c.Brand)
+                    .Include(c => c.Images)
+                    .Include(c => c.Users)
+                    .FirstOrDefaultAsync(c => c.Id == car.Id);
+                context.Entry(carEntity).OriginalValues.SetValues(carEntityToUpdate);
+                await context.SaveChangesAsync();
+                return _mapper.Map<Car>(carEntity);
+            }
         }
-        public Task<Car> GetByIdAsync(int id)
+        public async Task<Car> DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-        public Task<List<Car>> GetCarsAsync(int pageNumber = 1)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Car> UpdateAsync(Car car)
-        {
-            throw new NotImplementedException();
+            using(var context = _dbContextFactory.CreateDbContext())
+            {
+                var carEntity = context.Cars
+                    .FirstOrDefault(c => c.Id == id);
+
+                var result = context.Cars.Remove(carEntity);
+                await context.SaveChangesAsync();
+
+                return _mapper.Map<Car>(result.Entity);
+            }
         }
     }
 }
