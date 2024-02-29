@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
+using System.Linq;
 
 namespace E_CarShop.DataBase.Repositories
 {
@@ -18,6 +19,7 @@ namespace E_CarShop.DataBase.Repositories
             using (var context = _dbContextFactory.CreateDbContext())
             {
                 var userEntity = context.Users
+                    .Include(u => u.Cars)
                     .AsNoTracking()
                     .FirstOrDefault(u => u.Id == id);
                 return _mapper.Map<User>(userEntity);
@@ -28,9 +30,9 @@ namespace E_CarShop.DataBase.Repositories
         {
             using(var context = _dbContextFactory.CreateDbContext())
             {
-                var userEntities = await context.Users.
-                    AsNoTracking().
-                    ToListAsync();
+                var userEntities = await context.Users
+                    .AsNoTracking()
+                    .ToListAsync();
                 return _mapper.Map<List<User>>(userEntities);
             }
         }
@@ -51,9 +53,33 @@ namespace E_CarShop.DataBase.Repositories
             {
                 var userToUpdateEntity = _mapper.Map<UserEntity>(car);
                 var userEntity = context.Users
+                    .AsTracking()
+                    .Include(u => u.Cars)
                     .FirstOrDefault(u => u.Id == userToUpdateEntity.Id);
 
                 context.Entry(userEntity).CurrentValues.SetValues(userToUpdateEntity);
+                if(userToUpdateEntity.Cars != null)
+                {
+                    if(userEntity.Cars.Count() > userToUpdateEntity.Cars.Count())
+                    {
+                        foreach (var carEntityToUpdate in userToUpdateEntity.Cars)
+                        {
+                            if (!userEntity.Cars.Select(c => c.Id).Contains(carEntityToUpdate.Id))
+                            {
+                                userEntity.Cars.Add(carEntityToUpdate);
+                            }
+                        }
+                    } else if(userEntity.Cars.Count() < userToUpdateEntity.Cars.Count())
+                    {
+                        foreach (var carEntity in userEntity.Cars)
+                        {
+                            if(!userToUpdateEntity.Cars.Select(c => c.Id).Contains(carEntity.Id))
+                            {
+                                userEntity.Cars.Remove(carEntity);
+                            }
+                        }
+                    }
+                }
                 var result = context.Users.Update(userEntity);
                 await context.SaveChangesAsync();
 

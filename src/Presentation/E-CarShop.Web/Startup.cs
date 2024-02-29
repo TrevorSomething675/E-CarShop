@@ -73,9 +73,47 @@ namespace E_CarShop.Web
                         IsVisible = true,
                         Description = "car-2-description",
                         Price = 2000,
-                        Brand = context.Brands.FirstOrDefault()
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "path-1"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "path-2"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-3",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-3-description",
+                        Price = 3000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "path-1"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "path-2"
+                            }
+                        }
                     }
                 };
+                context.Cars.AddRange(cars);
+                context.SaveChanges();
+                var jijaCars = context.Cars.Where(c => c.Id > 1).ToList();
                 var users = new List<UserEntity>
                 {
                     new UserEntity
@@ -83,12 +121,11 @@ namespace E_CarShop.Web
                         Name = "user-1",
                         Email = "user@mail.ru",
                         Password = "123123123Qq",
-                        Cars = context.Cars.ToList(),
+                        Cars = jijaCars,
                         Role = context.Roles.FirstOrDefault()
                     }
                 };
                 context.Users.AddRange(users);
-                context.Cars.AddRange(cars);
                 context.SaveChanges();
             }
         }
