@@ -2,7 +2,7 @@
 
 namespace E_CarShop.Application.Repositories
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     {
         public Task<User> GetByIdAsync(int id);
         public Task<List<User>> GetUsersAsync(int pageNumber = 1);

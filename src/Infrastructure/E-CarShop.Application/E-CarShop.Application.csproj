@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\Core\E-CarShop.Core\E-CarShop.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

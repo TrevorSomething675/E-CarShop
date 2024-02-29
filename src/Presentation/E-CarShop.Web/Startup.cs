@@ -14,9 +14,11 @@ namespace E_CarShop.Web
         {
             var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
             services.Configure<DataBaseOptions>(configuration.GetSection(DataBaseOptions.SectionName));
+            services.Configure<JwtAuthOptions>(configuration.GetSection(JwtAuthOptions.SectionName));
+
             services.AddDbContextFactory<MainContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ICarsRepository, CarsRepository>();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
             services.AddAppAutoMapper();
             services.AddControllersWithViews();

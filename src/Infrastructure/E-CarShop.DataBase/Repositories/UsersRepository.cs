@@ -1,16 +1,18 @@
 ﻿using E_CarShop.Application.Repositories;
+using E_CarShop.Core.ConfigurationModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
-using System.Linq;
 
 namespace E_CarShop.DataBase.Repositories
 {
-    public class UserRepository(
+    public class UsersRepository(
         IMapper mapper,
-        IDbContextFactory<MainContext> dbContextFactory)
-        : IUserRepository
+        IDbContextFactory<MainContext> dbContextFactory,
+        IOptions<JwtAuthOptions> options
+        ) : IUsersRepository
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
@@ -25,7 +27,6 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<User>(userEntity);
             }
         }
-
         public async Task<List<User>> GetUsersAsync(int pageNumber = 1)
         {
             using(var context = _dbContextFactory.CreateDbContext())

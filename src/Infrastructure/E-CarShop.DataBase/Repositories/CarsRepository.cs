@@ -6,10 +6,10 @@ using AutoMapper;
 
 namespace E_CarShop.DataBase.Repositories
 {
-    public class CarRepository(
+    public class CarsRepository(
         IDbContextFactory<MainContext> dbContextFactory,
         IMapper mapper
-        ) : ICarRepository
+        ) : ICarsRepository
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
