@@ -20,12 +20,12 @@ namespace E_CarShop.DataBase.Repositories
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
-                var userEntity = context.Users
+                var userEntity = await context.Users
                     .Include(u => u.Cars)
                     .Include(u => u.Role)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
-                return _mapper.Map<User>(userEntity);
+                return _mapper.Map<User>(userEntity); 
             }
         }
         public async Task<List<User>> GetUsersAsync(int pageNumber, CancellationToken cancellationToken)

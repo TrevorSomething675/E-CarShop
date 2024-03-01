@@ -1,11 +1,13 @@
 ﻿using E_CarShop.Application.Repositories;
 using E_CarShop.Core.ConfigurationModels;
+using E_CarShop.Infrastructure.Services;
 using E_CarShop.DataBase.Repositories;
+using E_CarShop.Application.Services;
 using E_CarShop.Web.Configurations;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.DataBase;
 using System.Reflection;
-using Microsoft.AspNetCore.Authentication;
+using FluentValidation;
 
 namespace E_CarShop.Web
 {
@@ -17,11 +19,17 @@ namespace E_CarShop.Web
             services.Configure<DataBaseOptions>(configuration.GetSection(DataBaseOptions.SectionName));
             services.Configure<JwtAuthOptions>(configuration.GetSection(JwtAuthOptions.SectionName));
 
+            services.AddAppAutoMapper();
+
             services.AddDbContextFactory<MainContext>();
+
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICarsRepository, CarsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+
+            services.AddHttpContextAccessor();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
-            services.AddAppAutoMapper();
+            services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker)));
             services.AddControllersWithViews();
             using (var context = services.BuildServiceProvider().GetRequiredService<MainContext>())
             {
@@ -134,6 +142,7 @@ namespace E_CarShop.Web
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAppAuth();
             app.UseHttpsRedirection();
             app.UseHsts();
             app.UseRouting();

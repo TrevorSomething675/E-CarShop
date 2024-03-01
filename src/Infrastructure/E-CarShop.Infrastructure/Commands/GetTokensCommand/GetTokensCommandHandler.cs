@@ -23,7 +23,7 @@ namespace E_CarShop.Infrastructure.Commands.GetTokensCommand
             if (!validationResult.IsValid)
                 return Result<JwtTokensModel>.Invalid(validationResult.AsErrors());
 
-            var user = await _usersRepository.GetByIdAsync(request.UserId);
+            var user = await _usersRepository.GetByIdAsync(request.UserId, cancellationToken);
             if (user == null || user.Role.Name != request.Role)
                 return Result<JwtTokensModel>.NotFound("Неверный id пользователя или роль");
             

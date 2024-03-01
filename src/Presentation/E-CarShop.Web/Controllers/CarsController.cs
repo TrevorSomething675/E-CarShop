@@ -18,13 +18,13 @@ namespace E_CarShop.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById([Required][FromHeader] int id)
         {
-            var userId = int.Parse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
             return (await _mediator.Send(new GetCarByIdQuery(id, userId))).ToActionResult();
         }
         [HttpGet]
         public async Task<IActionResult> GetAll([FromHeader] int pageNumber = 1)
         {
-            var userId = int.Parse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            var userId = Convert.ToInt32(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
             return (await _mediator.Send(new GetCarsQuery(pageNumber, userId))).ToActionResult();
         }
         [HttpPost]
