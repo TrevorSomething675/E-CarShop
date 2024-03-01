@@ -5,6 +5,7 @@ using E_CarShop.Web.Configurations;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.DataBase;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication;
 
 namespace E_CarShop.Web
 {
@@ -17,8 +18,8 @@ namespace E_CarShop.Web
             services.Configure<JwtAuthOptions>(configuration.GetSection(JwtAuthOptions.SectionName));
 
             services.AddDbContextFactory<MainContext>();
-            services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<ICarsRepository, CarsRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
             services.AddAppAutoMapper();
             services.AddControllersWithViews();

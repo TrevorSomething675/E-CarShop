@@ -16,47 +16,48 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
-            using (var context = _dbContextFactory.CreateDbContext())
+            await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var userEntity = context.Users
                     .Include(u => u.Cars)
+                    .Include(u => u.Role)
                     .AsNoTracking()
-                    .FirstOrDefault(u => u.Id == id);
+                    .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
                 return _mapper.Map<User>(userEntity);
             }
         }
-        public async Task<List<User>> GetUsersAsync(int pageNumber = 1)
+        public async Task<List<User>> GetUsersAsync(int pageNumber, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var userEntities = await context.Users
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
                 return _mapper.Map<List<User>>(userEntities);
             }
         }
-        public async Task<User> CreateAsync(User car)
+        public async Task<User> CreateAsync(User car, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var userEntity = _mapper.Map<UserEntity>(car);
                 var result = context.Users.Add(userEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<User>(result.Entity);
             }
         }
-        public async Task<User> UpdateAsync(User car)
+        public async Task<User> UpdateAsync(User car, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var userToUpdateEntity = _mapper.Map<UserEntity>(car);
-                var userEntity = context.Users
+                var userEntity = await context.Users
                     .AsTracking()
                     .Include(u => u.Cars)
-                    .FirstOrDefault(u => u.Id == userToUpdateEntity.Id);
+                    .FirstOrDefaultAsync(u => u.Id == userToUpdateEntity.Id, cancellationToken);
 
                 context.Entry(userEntity).CurrentValues.SetValues(userToUpdateEntity);
                 if(userToUpdateEntity.Cars != null)
@@ -82,19 +83,19 @@ namespace E_CarShop.DataBase.Repositories
                     }
                 }
                 var result = context.Users.Update(userEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<User>(result.Entity);
             }
         }
-        public async Task<User> DeleteByIdAsync(int id)
+        public async Task<User> DeleteByIdAsync(int id, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
-                var userEntity = context.Users
-                    .FirstOrDefault(u => u.Id == id);
+                var userEntity = await context.Users
+                    .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
                 var result = context.Users.Remove(userEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<User>(result.Entity);
             }

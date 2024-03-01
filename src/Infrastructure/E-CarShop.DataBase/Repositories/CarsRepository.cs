@@ -13,69 +13,79 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public async Task<Car> GetByIdAsync(int id)
+        public async Task<Car> GetByIdAsync(int id, string role, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var carEntity = context.Cars
-                    .AsNoTracking()
-                    .FirstOrDefault();
+                    .AsNoTracking();
+
+                if (role == "User")
+                    await carEntity.FirstOrDefaultAsync(c => c.IsVisible, cancellationToken);
+                else
+                    await carEntity.FirstOrDefaultAsync(cancellationToken);
+                        
                 return _mapper.Map<Car>(carEntity);
             }
         }
-        public async Task<List<Car>> GetCarsAsync(int pageNumber = 1)
+        public async Task<List<Car>> GetCarsAsync(int pageNumber, string role, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
-                var carEntities = await context.Cars
-                    .Include(c => c.Images)
-                    .AsNoTracking()
+                var carEntities = context.Cars
+                    .Include(c => c.Images);
+
+                if (role == "User")
+                    carEntities.Where(c => c.IsVisible);
+
+                await carEntities.AsNoTracking()
                     .Skip(8 * (pageNumber - 1))
                     .Take(8 * pageNumber)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
+
                 return _mapper.Map<List<Car>>(carEntities);
             }
         }
-        public async Task<Car> CreateAsync(Car car)
+        public async Task<Car> CreateAsync(Car car, CancellationToken cancellationToken)
         {
-            using (var context = _dbContextFactory.CreateDbContext())
+            await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var carEntity = _mapper.Map<CarEntity>(car);
                 var result = context.Cars.Add(carEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
                 return _mapper.Map<Car>(result.Entity);
             }
         }
-        public async Task<Car> UpdateAsync(Car car)
+        public async Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken)
         {
-            using (var context = _dbContextFactory.CreateDbContext())
+            await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var carEntityToUpdate = _mapper.Map<CarEntity>(car);
                 var carEntity = await context.Cars
                     .Include(c => c.Images)
                     .Include(c => c.Brand)
                     .Include(c => c.Users)
-                    .FirstOrDefaultAsync(c => c.Id == car.Id);
+                    .FirstOrDefaultAsync(c => c.Id == car.Id, cancellationToken);
                 context.Entry(carEntity).CurrentValues.SetValues(carEntityToUpdate);
 
                 if (car.Images != null)
                     carEntity.Images = carEntityToUpdate.Images;
 
                 var result = context.Cars.Update(carEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<Car>(result.Entity);
             }
         }
-        public async Task<Car> DeleteByIdAsync(int id)
+        public async Task<Car> DeleteByIdAsync(int id, CancellationToken cancellationToken)
         {
-            using(var context = _dbContextFactory.CreateDbContext())
+            await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
-                var carEntity = context.Cars
-                    .FirstOrDefault(c => c.Id == id);
+                var carEntity = await context.Cars
+                    .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
 
                 var result = context.Cars.Remove(carEntity);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<Car>(result.Entity);
             }

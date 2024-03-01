@@ -9,19 +9,23 @@ using MediatR;
 namespace E_CarShop.Web.Controllers
 {
     public class CarsController(
-        IMediator mediator
+        IMediator mediator,
+        IHttpContextAccessor httpContextAccessor
         ) : Controller
     {
         private readonly IMediator _mediator = mediator;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
         [HttpGet]
-        public async Task<IActionResult> GetById([Required] int id)
+        public async Task<IActionResult> GetById([Required][FromHeader] int id)
         {
-            return (await _mediator.Send(new GetCarByIdQuery(id))).ToActionResult();
+            var userId = int.Parse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            return (await _mediator.Send(new GetCarByIdQuery(id, userId))).ToActionResult();
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pageNumber = 1)
+        public async Task<IActionResult> GetAll([FromHeader] int pageNumber = 1)
         {
-            return (await _mediator.Send(new GetCarsQuery(pageNumber))).ToActionResult();
+            var userId = int.Parse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            return (await _mediator.Send(new GetCarsQuery(pageNumber, userId))).ToActionResult();
         }
         [HttpPost]
         public async Task<IActionResult> Create()
