@@ -13,17 +13,13 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public async Task<Car> GetByIdAsync(int id, string role, CancellationToken cancellationToken)
+        public async Task<Car> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
                 var carEntity = context.Cars
-                    .AsNoTracking();
-
-                if (role == "User")
-                    await carEntity.FirstOrDefaultAsync(c => c.IsVisible, cancellationToken);
-                else
-                    await carEntity.FirstOrDefaultAsync(cancellationToken);
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(cancellationToken);
                         
                 return _mapper.Map<Car>(carEntity);
             }
