@@ -27,7 +27,7 @@ namespace E_CarShop.Infrastructure.Queries.GetCarByIdQuery
 
             var user = await _usersRepository.GetByIdAsync(request.UserId, cancellationToken);
             var role = user.Role.Name ?? "User";
-            var car = await _carsRepository.GetByIdAsync(request.Id, role, cancellationToken);
+            var car = await _carsRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (car == null)
                 return Result<CarResponse>.NotFound("Машина не найдена");

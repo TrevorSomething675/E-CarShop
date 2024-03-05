@@ -146,6 +146,11 @@ namespace E_CarShop.Web
             app.UseHttpsRedirection();
             app.UseHsts();
             app.UseRouting();
+            app.UseCors(builder => {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+                });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

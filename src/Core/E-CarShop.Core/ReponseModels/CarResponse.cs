@@ -1,4 +1,6 @@
-﻿namespace E_CarShop.Core.ReponseModels
+﻿using System.Text.Json.Serialization;
+
+namespace E_CarShop.Core.ReponseModels
 {
     public class CarResponse : BaseResponse
     {
@@ -8,6 +10,8 @@
         public string Description { get; set; }
         public int Price { get; set; }
 
+        [JsonIgnore]
+        [JsonPropertyName("Car")]
         public List<ImageResponse> Images { get; set; }
         public List<UserResponse> Users { get; set; }
         public int BrandId { get; set; }

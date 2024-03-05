@@ -1,6 +1,8 @@
+import Cars from "./../../Components/Cars/Cars.jsx";
+
 const CarsPage = () => {
-    return <div>
-        <h2>CarsPage</h2>
+    return <div className="row">
+        <Cars />
     </div>
 }
 
