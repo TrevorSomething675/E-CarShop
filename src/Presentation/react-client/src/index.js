@@ -1,3 +1,4 @@
+import "./Lib/bootstrap-5.0.2-dist/css/bootstrap.css";
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 import React from 'react';

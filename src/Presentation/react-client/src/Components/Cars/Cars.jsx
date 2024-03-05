@@ -1,4 +1,4 @@
-import carsStyles from "./Cars.css";
+import styles from "./Cars.css";
 
 const Cars = () =>{
     <div>
