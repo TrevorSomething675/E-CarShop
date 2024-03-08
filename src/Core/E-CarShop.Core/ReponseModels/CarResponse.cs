@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using E_CarShop.Core.JsonConverterConfiguration;
+using System.Text.Json.Serialization;
 
 namespace E_CarShop.Core.ReponseModels
 {
@@ -10,8 +11,6 @@ namespace E_CarShop.Core.ReponseModels
         public string Description { get; set; }
         public int Price { get; set; }
 
-        [JsonIgnore]
-        [JsonPropertyName("Car")]
         public List<ImageResponse> Images { get; set; }
         public List<UserResponse> Users { get; set; }
         public int BrandId { get; set; }

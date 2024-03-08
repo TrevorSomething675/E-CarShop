@@ -8,6 +8,7 @@ using E_CarShop.DataBase.Entities;
 using E_CarShop.DataBase;
 using System.Reflection;
 using FluentValidation;
+using E_CarShop.Core.JsonConverterConfiguration;
 
 namespace E_CarShop.Web
 {
@@ -34,7 +35,12 @@ namespace E_CarShop.Web
             services.AddHttpContextAccessor();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
             services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker)));
-            services.AddControllersWithViews();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new ImageResponseConfiguration());
+                    options.JsonSerializerOptions.Converters.Add(new CarResponseConfiguration());
+                });
             
             using (var context = services.BuildServiceProvider().GetRequiredService<MainContext>())
             {

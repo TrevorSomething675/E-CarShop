@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import styles from "./Car.css";
 import axios from "axios";
 
-const Car = ({name, description, price}) =>{
+const Car = ({name, description, price, images}) =>{
+    console.log(images);
     useEffect(() => {
     });
 
@@ -19,6 +20,9 @@ const Car = ({name, description, price}) =>{
         </div>
         <div>
             {price}
+        </div>
+        <div>
+            {images}
         </div>
     </div>
 </div>
