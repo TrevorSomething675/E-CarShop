@@ -131,6 +131,72 @@ namespace E_CarShop.Web
                                 Path = "cars-image-bucket/BMW-X7-2019.jpg"
                             }
                         }
+                    },
+                                        new CarEntity
+                    {
+                        Name = "car-1",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-1-description",
+                        Price = 1000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/Audi-Q7.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-2",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-2-description",
+                        Price = 2000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-3",
+                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-4",
+                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-3",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-3-description",
+                        Price = 3000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/BMW-X6-2016.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/BMW-X7-2019.jpg"
+                            }
+                        }
                     }
                 };
                 context.Cars.AddRange(cars);

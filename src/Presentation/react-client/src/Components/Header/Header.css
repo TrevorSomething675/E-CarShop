@@ -1,14 +1,3 @@
-/*
-Header{
-    font-size:1.6rem;
-    color: var(--light-orange-color)!important;
-    background-color: var(--dark-gray-color);
-    border-bottom: 2px solid var(--light-orange-color);
-    flex-shrink: 0;
-    height: 10%;
-}
-*/
-
 a{
     color: var(--light-orange-color);
     text-decoration: none;
@@ -30,7 +19,7 @@ header{
 
 .header-item{
     white-space: nowrap;
-    font-size:1.5rem;
+    font-size: 1.5rem;
     padding: 0.25rem 0.5rem;
 }
 

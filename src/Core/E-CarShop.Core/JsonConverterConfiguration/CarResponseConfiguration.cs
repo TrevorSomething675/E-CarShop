@@ -59,35 +59,39 @@ namespace E_CarShop.Core.JsonConverterConfiguration
         public override void Write(Utf8JsonWriter writer, CarResponse value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WriteNumber("Id", value.Id);
-            writer.WriteString("Name", value.Name);
-            writer.WriteString("Color", value.Color);
-            writer.WriteBoolean("IsVisible", value.IsVisible);
-            writer.WriteString("Description", value.Description);
-            writer.WriteNumber("Price", value.Price);
+                writer.WriteNumber("Id", value.Id);
+                writer.WriteString("Name", value.Name);
+                writer.WriteString("Color", value.Color);
+                writer.WriteBoolean("IsVisible", value.IsVisible);
+                writer.WriteString("Description", value.Description);
+                writer.WriteNumber("Price", value.Price);
 
-            writer.WriteStartArray("Images");
-            foreach (var image in value.Images)
-            {
-                writer.WriteNumber("Id", image.Id);
-                writer.WriteString("Name", image.Name);
-                writer.WriteString("Base64String", image.Base64String);
-            }
-            writer.WriteEndArray();
+                writer.WriteStartArray("Images");
+                foreach (var image in value.Images)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteNumber("Id", image.Id);
+                    writer.WriteString("Name", image.Name);
+                    writer.WriteString("Base64String", image.Base64String);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
 
-            writer.WriteStartArray("Users");
-            foreach (var user in value.Users)
-            {
-                writer.WriteNumber("Id", user.Id);
-                writer.WriteString("Name", user.Name);
-                writer.WriteString("Password", user.Password);
-            }
-            writer.WriteEndArray();
+                writer.WriteStartArray("Users");
+                foreach (var user in value.Users)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteNumber("Id", user.Id);
+                    writer.WriteString("Name", user.Name);
+                    writer.WriteString("Password", user.Password);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
 
-            writer.WriteNumber("BrandId", value.BrandId);
-            writer.WriteStartObject("Brand");
+                writer.WriteNumber("BrandId", value.BrandId);
+                writer.WriteStartObject("Brand");
                 writer.WriteString("Name", value?.Brand?.Name);
-            writer.WriteEndObject();
+                writer.WriteEndObject();
 
             writer.WriteEndObject();
         }

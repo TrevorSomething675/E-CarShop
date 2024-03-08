@@ -6,7 +6,7 @@ import styles from "./Layout.css";
 const Layout = () =>{
     return <>
         <Header />
-        <main>
+        <main className="container-fluid">
             <Outlet />
         </main>
 

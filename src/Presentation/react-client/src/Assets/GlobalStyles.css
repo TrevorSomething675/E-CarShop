@@ -6,19 +6,15 @@
     --dark-orange-color: #a86807;
 }
 
-#root, html, body, #root > div, .App > div{
-    position: relative;
+html, body, #root{
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
-main{
-    position: relative;
-    height: 100%!important;
+.App{
     display: flex;
-    flex-grow: 1;
+    flex-direction: column;
+    min-height: 100%;
     color: var(--light-text-color);
     background-color: var(--light-gray-color);
 }

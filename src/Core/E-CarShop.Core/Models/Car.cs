@@ -1,4 +1,6 @@
-﻿namespace E_CarShop.Core.Models
+﻿using System.Text.Json.Serialization;
+
+namespace E_CarShop.Core.Models
 {
     public class Car : BaseModel
     {
