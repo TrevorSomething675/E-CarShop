@@ -7,15 +7,23 @@ import axios from "axios";
 const Cars = () =>{
     useEffect(() => {
         console.log(DiContainer.CarShopUrl);
-        var cars = axios.get(`${DiContainer.CarShopUrl}Cars/GetAll`);
-        console.log(cars);
-    })
+        axios.get(`${DiContainer.CarShopUrl}Cars/GetAll`)
+        .then((response) => {
+            console.log(response.data.result);
+            setCars(response.data.result);
+        })
+        .catch(() => {
+            console.log("Ошибка при получении данных");
+        });
+    }, []);
+
     const [cars, setCars] = useState([]);
 
-    return <div>
-        <Car />
-        <Car />
-    </div>
+    return <>
+        {cars.map((car) =>(
+            <Car key={car.id} {...car}/>
+        ))}
+    </>
 }
 
 export default Cars;

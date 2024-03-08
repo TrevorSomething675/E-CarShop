@@ -16,6 +16,9 @@ namespace E_CarShop.DataBase.Configurations
                 .WithMany(c => c.Images)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired(true);
+
+            builder.Property(i => i.Base64String)
+                .IsRequired(false);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace E_CarShop.DataBase.Configurations
         public void Configure(EntityTypeBuilder<BrandEntity> builder)
         {
             builder.ToTable("Brands");
+
             builder.HasKey(b => b.Id);
 
             builder.HasMany(b => b.Cars)

@@ -16,13 +16,17 @@ namespace E_CarShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+
+            var jija = configuration.GetSection(DataBaseOptions.SectionName);
             services.Configure<DataBaseOptions>(configuration.GetSection(DataBaseOptions.SectionName));
             services.Configure<JwtAuthOptions>(configuration.GetSection(JwtAuthOptions.SectionName));
+            services.Configure<MinioOptions>(configuration.GetSection(MinioOptions.SectionName));
 
+            services.AddAppMinio();
             services.AddAppAutoMapper();
-
             services.AddDbContextFactory<MainContext>();
 
+            services.AddScoped<IMinioService, MinioService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICarsRepository, CarsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
@@ -31,6 +35,7 @@ namespace E_CarShop.Web
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));
             services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker)));
             services.AddControllersWithViews();
+            
             using (var context = services.BuildServiceProvider().GetRequiredService<MainContext>())
             {
                 context.Database.EnsureDeleted();
@@ -68,12 +73,12 @@ namespace E_CarShop.Web
                             new ImageEntity
                             {
                                 Name = "image-name-1",
-                                Path = "path-1"
+                                Path = "cars-image-bucket/Audi-Q7.jpg"
                             },
                             new ImageEntity
                             {
                                 Name = "image-name-2",
-                                Path = "path-2"
+                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
                             }
                         }
                     },
@@ -89,13 +94,13 @@ namespace E_CarShop.Web
                         {
                             new ImageEntity
                             {
-                                Name = "image-name-1",
-                                Path = "path-1"
+                                Name = "image-name-3",
+                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
                             },
                             new ImageEntity
                             {
-                                Name = "image-name-2",
-                                Path = "path-2"
+                                Name = "image-name-4",
+                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
                             }
                         }
                     },
@@ -112,12 +117,12 @@ namespace E_CarShop.Web
                             new ImageEntity
                             {
                                 Name = "image-name-1",
-                                Path = "path-1"
+                                Path = "cars-image-bucket/BMW-X6-2016.jpg"
                             },
                             new ImageEntity
                             {
                                 Name = "image-name-2",
-                                Path = "path-2"
+                                Path = "cars-image-bucket/BMW-X7-2019.jpg"
                             }
                         }
                     }

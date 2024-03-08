@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Minio" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\E-CarShop.Core\E-CarShop.Core.csproj" />
   </ItemGroup>
 

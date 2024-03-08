@@ -92,6 +92,7 @@ namespace E_CarShop.DataBase.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Path = table.Column<string>(type: "text", nullable: false),
+                    Base64String = table.Column<string>(type: "text", nullable: true),
                     CarId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

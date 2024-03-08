@@ -98,6 +98,9 @@ namespace E_CarShop.DataBase.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Base64String")
+                        .HasColumnType("text");
+
                     b.Property<int>("CarId")
                         .HasColumnType("integer");
 

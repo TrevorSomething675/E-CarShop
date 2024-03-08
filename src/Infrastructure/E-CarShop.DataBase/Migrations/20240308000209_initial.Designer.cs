@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace E_CarShop.DataBase.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20240227200234_initial")]
+    [Migration("20240308000209_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -100,6 +100,9 @@ namespace E_CarShop.DataBase.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Base64String")
+                        .HasColumnType("text");
 
                     b.Property<int>("CarId")
                         .HasColumnType("integer");

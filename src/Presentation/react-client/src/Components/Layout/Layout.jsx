@@ -4,14 +4,14 @@ import Footer from "../Footer/Footer.jsx";
 import styles from "./Layout.css";
 
 const Layout = () =>{
-    return <div>
+    return <>
         <Header />
         <main>
             <Outlet />
         </main>
 
         <Footer />
-    </div>
+    </>
 }
 
 export default Layout;
