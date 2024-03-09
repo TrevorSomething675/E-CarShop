@@ -1,4 +1,4 @@
-main{
+.main{
     color: var(--light-text-color);
     background-color: var(--light-gray-color);
 }

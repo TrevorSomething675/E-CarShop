@@ -1,7 +1,7 @@
 import DiContainer from "../../Extensions/DI-container.js";
 import { useEffect, useState } from "react";
 import Car from "./../Car/Car.jsx";
-import styles from "./Cars.css";
+import styles from "./Cars.module.css";
 import axios from "axios";
 
 const Cars = () =>{

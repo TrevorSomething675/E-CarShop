@@ -3,7 +3,7 @@ a{
     text-decoration: none;
 }
 
-header{
+.header{
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -12,18 +12,18 @@ header{
     border-bottom: 2px solid;
 }
 
-.header-section{
+.headerSection{
     display: flex;
     align-items: center;
 }
 
-.header-item{
+.headerItem{
     white-space: nowrap;
     font-size: 1.5rem;
     padding: 0.25rem 0.5rem;
 }
 
-.header-logo{
+.headerLogo{
     font-size: 2rem;
     font-weight: bold;
 }
@@ -32,4 +32,15 @@ header{
 a:hover{
     color:var(--light-text-color);
     transition: 0.2s;
+}
+
+svg{
+    height: 5rem;
+    width: 5rem;
+}
+
+.iconHeader{
+    color: red !important;
+    max-height: 1.5rem;
+    max-width: 1.5rem;
 }

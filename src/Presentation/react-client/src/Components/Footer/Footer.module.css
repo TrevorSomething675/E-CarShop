@@ -1,4 +1,4 @@
-footer{
+.footer{
     color:var(--light-orange-color);
     background-color: var(--dark-gray-color);
     display: flex;

@@ -1,4 +1,4 @@
-img {
+.productImage {
     text-align: center;
     width: 100%;
     height: 100%;
@@ -7,12 +7,12 @@ img {
     border-radius:5px;
 }
 
-.product-container{
+.productContainer{
     background-color:var(--dark-gray-color);
     border-radius:5px;
 }
 
-.product-description{
+.productDescription{
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
