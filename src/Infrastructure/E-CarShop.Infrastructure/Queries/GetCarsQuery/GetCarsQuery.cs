@@ -4,9 +4,8 @@ using MediatR;
 
 namespace E_CarShop.Infrastructure.Queries.GetCarsQuery
 {
-    public class GetCarsQuery(int pageNumber, int userId) : IRequest<Result<List<CarResponse>>>
+    public class GetCarsQuery(int userId) : IRequest<Result<List<CarResponse>>>
     {
-        public int PageNumber { get; } = pageNumber;
         public int UserId { get; } = userId;
     }
 }

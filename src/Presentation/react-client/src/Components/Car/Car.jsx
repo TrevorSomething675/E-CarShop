@@ -5,7 +5,6 @@ import axios from "axios";
 
 const Car = ({Id, Name, Description, Price, Images}) =>{
     useEffect(() => {
-        console.log(Images[0]);
     });
 
     return <div className="col-xxl-3 col-xl-4 col-md-6 col-sm-12 ">

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_CarShop.DataBase.Repositories
 {
@@ -24,7 +25,25 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<Car>(carEntity);
             }
         }
-        public async Task<List<Car>> GetCarsAsync(int pageNumber, string role, CancellationToken cancellationToken)
+        public async Task<List<Car>> GetPageCarsAsync(int pageNumber, string role, CancellationToken cancellationToken)
+        {
+            await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
+            {
+                var carsEntities = context.Cars
+                    .Include(c => c.Images);
+
+                if (role == "User")
+                    carsEntities.Where(c => c.IsVisible);
+
+                var resultCars = await carsEntities.AsNoTracking()
+                    .Skip(8 * (pageNumber - 1))
+                    .Take(8 * pageNumber)
+                    .ToListAsync(cancellationToken);
+
+                return _mapper.Map<List<Car>>(resultCars);
+            }
+        }
+        public async Task<List<Car>> GetCarsAsync(string role, CancellationToken cancellationToken)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -33,11 +52,8 @@ namespace E_CarShop.DataBase.Repositories
 
                 if (role == "User")
                     carEntities.Where(c => c.IsVisible);
-
-                await carEntities.AsNoTracking()
-                    .Skip(8 * (pageNumber - 1))
-                    .Take(8 * pageNumber)
-                    .ToListAsync(cancellationToken);
+                else
+                    await carEntities.ToListAsync(cancellationToken);
 
                 return _mapper.Map<List<Car>>(carEntities);
             }

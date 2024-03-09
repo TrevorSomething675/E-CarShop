@@ -1,4 +1,5 @@
 import DiContainer from "../../Extensions/DI-container.js";
+import PagginationPanel from "../PagginationPanel/PagginationPanel.jsx"
 import { useEffect, useState } from "react";
 import Car from "./../Car/Car.jsx";
 import styles from "./Cars.module.css";
@@ -6,10 +7,8 @@ import axios from "axios";
 
 const Cars = () =>{
     useEffect(() => {
-        console.log(DiContainer.CarShopUrl);
-        axios.get(`${DiContainer.CarShopUrl}Cars/GetAll`)
+        axios.get(`${DiContainer.CarShopUrl}Cars/GetPageCars`)
         .then((response) => {
-            console.log(response.data.result);
             setCars(response.data.result);
         })
         .catch(() => {
@@ -23,6 +22,7 @@ const Cars = () =>{
         {cars.map((car) =>(
             <Car key={car.Id} {...car}/>
         ))}
+        <PagginationPanel srcUrl='Cars/GetAll' />
     </>
 }
 

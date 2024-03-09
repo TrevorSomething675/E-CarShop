@@ -84,73 +84,7 @@ namespace E_CarShop.Web
                             new ImageEntity
                             {
                                 Name = "image-name-2",
-                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
-                            }
-                        }
-                    },
-                    new CarEntity
-                    {
-                        Name = "car-2",
-                        Color = "Red",
-                        IsVisible = true,
-                        Description = "car-2-description",
-                        Price = 2000,
-                        Brand = context.Brands.FirstOrDefault(),
-                        Images = new List<ImageEntity>
-                        {
-                            new ImageEntity
-                            {
-                                Name = "image-name-3",
-                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
-                            },
-                            new ImageEntity
-                            {
-                                Name = "image-name-4",
-                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
-                            }
-                        }
-                    },
-                    new CarEntity
-                    {
-                        Name = "car-3",
-                        Color = "Red",
-                        IsVisible = true,
-                        Description = "car-3-description",
-                        Price = 3000,
-                        Brand = context.Brands.FirstOrDefault(),
-                        Images = new List<ImageEntity>
-                        {
-                            new ImageEntity
-                            {
-                                Name = "image-name-1",
-                                Path = "cars-image-bucket/BMW-X6-2016.jpg"
-                            },
-                            new ImageEntity
-                            {
-                                Name = "image-name-2",
-                                Path = "cars-image-bucket/BMW-X7-2019.jpg"
-                            }
-                        }
-                    },
-                                        new CarEntity
-                    {
-                        Name = "car-1",
-                        Color = "Red",
-                        IsVisible = true,
-                        Description = "car-1-description",
-                        Price = 1000,
-                        Brand = context.Brands.FirstOrDefault(),
-                        Images = new List<ImageEntity>
-                        {
-                            new ImageEntity
-                            {
-                                Name = "image-name-1",
                                 Path = "cars-image-bucket/Audi-Q7.jpg"
-                            },
-                            new ImageEntity
-                            {
-                                Name = "image-name-2",
-                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
                             }
                         }
                     },
@@ -167,12 +101,12 @@ namespace E_CarShop.Web
                             new ImageEntity
                             {
                                 Name = "image-name-3",
-                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
+                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
                             },
                             new ImageEntity
                             {
                                 Name = "image-name-4",
-                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
+                                Path = "cars-image-bucket/Audi-RS-Q8-2021.jpg"
                             }
                         }
                     },
@@ -189,12 +123,144 @@ namespace E_CarShop.Web
                             new ImageEntity
                             {
                                 Name = "image-name-1",
+                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/BMW-520d-Xdrive.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-4",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-4-description",
+                        Price = 4000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/BMW-M4-Competition.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-5",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-5-description",
+                        Price = 5000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-3",
                                 Path = "cars-image-bucket/BMW-X6-2016.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-4",
+                                Path = "cars-image-bucket/BMW-X6-2016.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-6",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-6-description",
+                        Price = 6000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/BMW-X7-2019.jpg"
                             },
                             new ImageEntity
                             {
                                 Name = "image-name-2",
                                 Path = "cars-image-bucket/BMW-X7-2019.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-7",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-7-description",
+                        Price = 7000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/LiXiang-L7.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/LiXiang-L7.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-8",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-8-description",
+                        Price = 8000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/LiXiang-L9.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/LiXiang-L9.jpg"
+                            }
+                        }
+                    },
+                    new CarEntity
+                    {
+                        Name = "car-9",
+                        Color = "Red",
+                        IsVisible = true,
+                        Description = "car-9-description",
+                        Price = 9000,
+                        Brand = context.Brands.FirstOrDefault(),
+                        Images = new List<ImageEntity>
+                        {
+                            new ImageEntity
+                            {
+                                Name = "image-name-1",
+                                Path = "cars-image-bucket/Volkswagen-Touareg-2019.jpg"
+                            },
+                            new ImageEntity
+                            {
+                                Name = "image-name-2",
+                                Path = "cars-image-bucket/Volkswagen-Touareg-2019.jpg"
                             }
                         }
                     }
@@ -232,7 +298,7 @@ namespace E_CarShop.Web
             {
                 endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Cars}/{action=GetAll}");
+                pattern: "{controller=Cars}/{action=GetPageCars}");
             });
         }
     }

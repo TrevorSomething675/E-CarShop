@@ -5,11 +5,10 @@ namespace E_CarShop.Infrastructure.Queries.GetCarsQuery
 {
     public class GetCarsQueryValidator : AbstractValidator<GetCarsQuery>
     {
-        public GetCarsQueryValidator() 
+        public GetCarsQueryValidator()
         {
-            RuleFor(query => query.PageNumber)
-                .Must(CheckField.IsNumber)
-                .NotNull().NotEmpty();
+            RuleFor(query => query.UserId)
+                .Must(CheckField.IsNumber);
         }
     }
 }
