@@ -1,23 +1,26 @@
 import DiContainer from "../../Extensions/DI-container";
-import styles from "./PagginationPanel.module.css";
+import styles from "./PaginationPanel.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PaggingPannel = (props) =>{
+const PaginationPanel = ({srcUrl, onChangePage}) =>{
     useEffect(() => {
-        axios.get(`${DiContainer.CarShopUrl}${props.srcUrl}`)
+        console.log(`${DiContainer.CarShopUrl}${srcUrl}`);
+        axios.get(`${DiContainer.CarShopUrl}${srcUrl}`)
         .then((response) => {
             setPageNumbers(CreatePaggingModel(response.data.result.length, 8));
         })
-    }, [])
+    }, []);
     
-    const [currentPage, setCurrentPageNumber] = useState(1);
     const [pageNumbers, setPageNumbers] = useState([]);
-    
+    const HandlePageChange = (event) => {
+        onChangePage(event.target.value);
+    };
+
     return <>
-        <div className={styles.paginnationPanel}>
+        <div className={`${styles.paginnationPanel}`}>
             {pageNumbers.map((page) => {
-                return <button className={styles.paggingButton} key={page} onClick={() => setCurrentPageNumber(page)}>
+                return <button className={styles.paggingButton} key={page} onClick={HandlePageChange} value={page}>
                     {page}
                 </button>
             })}
@@ -34,4 +37,4 @@ const CreatePaggingModel = (items, totalItemsInPage) => {
     return pageNumbers;
 }
 
-export default PaggingPannel;
+export default PaginationPanel;

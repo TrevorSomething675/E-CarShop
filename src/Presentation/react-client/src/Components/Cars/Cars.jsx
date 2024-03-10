@@ -1,5 +1,4 @@
 import DiContainer from "../../Extensions/DI-container.js";
-import PagginationPanel from "../PagginationPanel/PagginationPanel.jsx"
 import { useEffect, useState } from "react";
 import Car from "./../Car/Car.jsx";
 import styles from "./Cars.module.css";
@@ -19,10 +18,11 @@ const Cars = () =>{
     const [cars, setCars] = useState([]);
 
     return <>
-        {cars.map((car) =>(
-            <Car key={car.Id} {...car}/>
-        ))}
-        <PagginationPanel srcUrl='Cars/GetAll' />
+        <div className="row"> 
+            {cars.map((car) =>(
+                <Car key={car.Id} {...car}/>
+            ))}
+        </div>
     </>
 }
 

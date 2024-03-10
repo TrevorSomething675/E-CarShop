@@ -7,7 +7,7 @@ const Layout = () =>{
     return <>
         <Header />
 
-        <main className={`${styles.main} container-fluid`}>
+        <main className={`${styles.main} container-fluid d-flex`}>
             <Outlet />
         </main>
 

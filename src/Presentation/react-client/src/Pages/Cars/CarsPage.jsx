@@ -1,9 +1,16 @@
+import PaginationPanel from "./../../Components/PaginationPanel/PaginationPanel.jsx";
 import Cars from "./../../Components/Cars/Cars.jsx";
+import styles from "./CarsPage.module.css";
+
+const HandlePageChange = () =>{
+    console.log(1234);
+}
 
 const CarsPage = () => {
-    return <div className="row">
+    return <>
         <Cars />
-    </div>
+        <PaginationPanel srcUrl="Cars/GetAll"/>
+    </>
 }
 
 export default CarsPage;
