@@ -3,24 +3,19 @@ import styles from "./PaginationPanel.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PaginationPanel = ({srcUrl, onChangePage}) =>{
+const PaginationPanel = ({srcUrl, onPageChange}) =>{
     useEffect(() => {
-        console.log(`${DiContainer.CarShopUrl}${srcUrl}`);
         axios.get(`${DiContainer.CarShopUrl}${srcUrl}`)
         .then((response) => {
             setPageNumbers(CreatePaggingModel(response.data.result.length, 8));
         })
     }, []);
-    
     const [pageNumbers, setPageNumbers] = useState([]);
-    const HandlePageChange = (event) => {
-        onChangePage(event.target.value);
-    };
 
     return <>
         <div className={`${styles.paginnationPanel}`}>
             {pageNumbers.map((page) => {
-                return <button className={styles.paggingButton} key={page} onClick={HandlePageChange} value={page}>
+                return <button className={styles.paggingButton} key={page} onClick={onPageChange} value={page}>
                     {page}
                 </button>
             })}

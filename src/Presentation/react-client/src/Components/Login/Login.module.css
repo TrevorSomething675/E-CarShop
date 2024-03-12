@@ -1,0 +1,92 @@
+.formContainer{
+    margin-left: auto;
+    margin-right: auto;
+    width: 18rem;
+    margin-top: 10rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: var(--dark-gray-color);
+}
+
+.formHeader{
+    font-size: 2rem;
+}
+
+.formBody{
+    display: flex;
+    flex-direction: column;
+}
+
+.formLabel{
+    margin-top: 0.5rem;
+}
+
+.formInput{
+    height: 2rem;
+    background-color: var(--light-gray-color);
+    border: none;
+    border-radius: 5px;
+    color:var(--light-text-color);
+}
+
+.formInput:focus{
+    outline: none;
+}
+
+.formButton{
+    transition: 0.2s;
+    color: var(--light-orange-color);
+    background: none;
+    border:none;
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem;
+}
+
+.formButton:hover{
+    transition: 0.2s;
+    color: var(--light-text-color);
+}
+
+.submitFormButton{
+    transition: 0.2s;
+    color: var(--light-text-color);
+    background-color: var(--light-gray-color);
+    border:none;
+    border-radius: 5px;
+    padding: 0.25rem 0.25rem;
+}
+
+.submitFormButton:hover{
+    transition: 0.2s;
+    color: var(--light-orange-color);
+}
+
+.formFooter{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    width: 18rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: var(--dark-gray-color);
+}
+
+.formFooterButton{
+    transition: 0.2s;
+    color: var(--light-text-color);
+    background-color: var(--light-green-color);
+    border-radius: 5px;
+    border: none;
+    padding: 0.25rem 0.25rem;
+}
+
+.formFooterButton:hover{
+    transition: 0.2s;
+    color: var(--light-text-color);
+    background-color: var(--dark-green-color);
+}
+
+.description{
+    text-align:center;
+}

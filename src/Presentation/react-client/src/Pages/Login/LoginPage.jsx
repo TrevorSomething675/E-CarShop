@@ -1,7 +1,9 @@
+import Login from "./../../Components/Login/Login.jsx";
+
 const LoginPage = () => {
-    return <div>
-        <h2>Login page</h2>
-    </div>
+    return <>
+        <Login />
+    </>
 }
 
 export default LoginPage;

@@ -4,16 +4,20 @@ import Car from "./../Car/Car.jsx";
 import styles from "./Cars.module.css";
 import axios from "axios";
 
-const Cars = () =>{
+const Cars = ({pageNumber}) =>{
     useEffect(() => {
-        axios.get(`${DiContainer.CarShopUrl}Cars/GetPageCars`)
+        axios.get(`${DiContainer.CarShopUrl}Cars/GetPageCars`, {
+            headers:{
+                pageNumber
+            }
+        })
         .then((response) => {
             setCars(response.data.result);
         })
         .catch(() => {
             console.log("Ошибка при получении данных");
         });
-    }, []);
+    }, [pageNumber]);
 
     const [cars, setCars] = useState([]);
 

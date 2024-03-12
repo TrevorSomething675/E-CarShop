@@ -4,6 +4,8 @@
     --light-text-color:#d6d4d4;
     --light-orange-color: #cc7d06;
     --dark-orange-color: #a86807;
+    --light-green-color: #067f0a;
+    --dark-green-color: #054507;
 }
 
 html, body, #root{

@@ -1,15 +1,18 @@
 import PaginationPanel from "./../../Components/PaginationPanel/PaginationPanel.jsx";
 import Cars from "./../../Components/Cars/Cars.jsx";
 import styles from "./CarsPage.module.css";
+import {useState} from 'react';
 
-const HandlePageChange = () =>{
-    console.log(1234);
-}
 
 const CarsPage = () => {
+    const HandlePageChange = (event) => {
+        setPageNumber(event.target.value);
+    }
+    const [pageNumber, setPageNumber] = useState(1);
+
     return <>
-        <Cars />
-        <PaginationPanel srcUrl="Cars/GetAll"/>
+        <Cars pageNumber={pageNumber}/>
+        <PaginationPanel srcUrl="Cars/GetAll" onPageChange={HandlePageChange}/>
     </>
 }
 

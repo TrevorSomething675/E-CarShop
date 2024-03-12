@@ -6,6 +6,7 @@
 }
 
 .paggingButton{
+    transition: 0.2s;
     text-decoration: underline 0.125rem;
     background: none;
     border: none;
@@ -13,6 +14,6 @@
 }
 
 .paggingButton:hover{
-    transition: 0.3s;
+    transition: 0.2s;
     color: var(--light-text-color)
 }
