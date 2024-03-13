@@ -17,7 +17,7 @@ namespace E_CarShop.Infrastructure.Queries.GetUserByIdQuery
         private readonly IMapper _mapper = mapper;
         private readonly IUsersRepository _usersRepository = usersRepository;
         private readonly IValidator<GetUserByIdQuery> _validator = validator;
-        public async Task<Result<UserResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<UserResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken = default)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 

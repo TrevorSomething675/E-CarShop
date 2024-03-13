@@ -17,7 +17,7 @@ namespace E_CarShop.Infrastructure.Queries.GetUsersQuery
         private readonly IMapper _mapper = mapper;
         private readonly IValidator<GetUsersQuery> _validator = validator;
         private readonly IUsersRepository _usersRepository = usersRepository;
-        public async Task<Result<List<UserResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<UserResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken = default)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 

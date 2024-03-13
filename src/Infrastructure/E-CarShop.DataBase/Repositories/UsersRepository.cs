@@ -16,7 +16,7 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public async Task<User> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<User> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -28,7 +28,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<User>(userEntity); 
             }
         }
-        public async Task<List<User>> GetUsersAsync(int pageNumber, CancellationToken cancellationToken)
+        public async Task<List<User>> GetUsersAsync(int pageNumber, CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -38,7 +38,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<List<User>>(userEntities);
             }
         }
-        public async Task<User> CreateAsync(User car, CancellationToken cancellationToken)
+        public async Task<User> CreateAsync(User car, CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -49,7 +49,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<User>(result.Entity);
             }
         }
-        public async Task<User> UpdateAsync(User car, CancellationToken cancellationToken)
+        public async Task<User> UpdateAsync(User car, CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -88,7 +88,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<User>(result.Entity);
             }
         }
-        public async Task<User> DeleteByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<User> DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {

@@ -14,14 +14,14 @@ namespace E_CarShop.Web.Controllers
     {
         private readonly IMediator _mediator = mediator;
         [HttpGet]
-        public async Task<IActionResult> GetById([Required][FromHeader] int id)
+        public async Task<IActionResult> GetById([Required][FromHeader] int id, CancellationToken cancellationToken = default)
         {
-            return (await _mediator.Send(new GetUserByIdQuery(id))).ToActionResult();
+            return (await _mediator.Send(new GetUserByIdQuery(id), cancellationToken)).ToActionResult();
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromHeader] int pageNumber = 1)
+        public async Task<IActionResult> GetAll([FromHeader] int pageNumber = 1, CancellationToken cancellationToken = default)
         {
-            return (await _mediator.Send(new GetUsersQuery(pageNumber))).ToActionResult();
+            return (await _mediator.Send(new GetUsersQuery(pageNumber), cancellationToken)).ToActionResult();
         }
     }
 }

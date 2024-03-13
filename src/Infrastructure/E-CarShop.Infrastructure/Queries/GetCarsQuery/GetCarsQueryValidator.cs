@@ -8,7 +8,7 @@ namespace E_CarShop.Infrastructure.Queries.GetCarsQuery
         public GetCarsQueryValidator()
         {
             RuleFor(query => query.UserId)
-                .Must(CheckField.IsNumber);
+                .Must(CheckField.IsNumber).WithMessage("Id должен быть числом");
         }
     }
 }

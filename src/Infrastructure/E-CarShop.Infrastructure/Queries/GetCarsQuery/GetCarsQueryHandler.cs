@@ -1,6 +1,7 @@
 ﻿using E_CarShop.Application.Repositories;
 using Ardalis.Result.FluentValidation;
 using E_CarShop.Core.ReponseModels;
+using E_CarShop.Core.Models;
 using FluentValidation;
 using Ardalis.Result;
 using AutoMapper;
@@ -19,7 +20,7 @@ namespace E_CarShop.Infrastructure.Queries.GetCarsQuery
         private readonly IValidator<GetCarsQuery> _validator = validator;
         private readonly ICarsRepository _carsRepository = carsRepository;
         private readonly IUsersRepository _usersRepository = usersRepository;
-        public async Task<Result<List<CarResponse>>> Handle(GetCarsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<CarResponse>>> Handle(GetCarsQuery request, CancellationToken cancellationToken = default)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
@@ -27,7 +28,12 @@ namespace E_CarShop.Infrastructure.Queries.GetCarsQuery
                 return Result<List<CarResponse>>.Invalid(validationResult.AsErrors());
 
             var user = await _usersRepository.GetByIdAsync(request.UserId, cancellationToken);
-            var cars = await _carsRepository.GetCarsAsync(user.Role.Name, cancellationToken);
+            var cars = new List<Car>();
+
+            if (user == null)
+                cars = await _carsRepository.GetPageCarsAsync(1, "User", cancellationToken);
+            else
+                cars = await _carsRepository.GetCarsAsync(user.Role.Name, cancellationToken);
 
             var carsReponse = _mapper.Map<List<CarResponse>>(cars);
             return Result<List<CarResponse>>.Success(carsReponse);

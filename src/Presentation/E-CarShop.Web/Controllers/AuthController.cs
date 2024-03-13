@@ -13,9 +13,9 @@ namespace E_CarShop.Web.Controllers
     {
         private readonly IMediator _mediator = mediator;
         [HttpGet]
-        public async Task<IActionResult> GetTokens([Required][FromHeader] GetTokensCommand command)
+        public async Task<IActionResult> GetTokens([Required][FromHeader] GetTokensCommand command, CancellationToken cancellationToken = default)
         {
-            return (await _mediator.Send(command)).ToActionResult();
+            return (await _mediator.Send(command, cancellationToken)).ToActionResult();
         }
     }
 }

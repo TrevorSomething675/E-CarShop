@@ -14,7 +14,7 @@ namespace E_CarShop.DataBase.Repositories
     {
         private readonly IMapper _mapper = mapper;
         private readonly IDbContextFactory<MainContext> _dbContextFactory = dbContextFactory;
-        public async Task<Car> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<Car> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -25,7 +25,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<Car>(carEntity);
             }
         }
-        public async Task<List<Car>> GetPageCarsAsync(int pageNumber, string role, CancellationToken cancellationToken)
+        public async Task<List<Car>> GetPageCarsAsync(int pageNumber, string role = "User", CancellationToken cancellationToken = default)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -43,7 +43,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<List<Car>>(resultCars);
             }
         }
-        public async Task<List<Car>> GetCarsAsync(string role, CancellationToken cancellationToken)
+        public async Task<List<Car>> GetCarsAsync(string role = "User", CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -58,7 +58,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<List<Car>>(carEntities);
             }
         }
-        public async Task<Car> CreateAsync(Car car, CancellationToken cancellationToken)
+        public async Task<Car> CreateAsync(Car car, CancellationToken cancellationToken = default)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -68,7 +68,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<Car>(result.Entity);
             }
         }
-        public async Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken)
+        public async Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken = default)
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
@@ -89,7 +89,7 @@ namespace E_CarShop.DataBase.Repositories
                 return _mapper.Map<Car>(result.Entity);
             }
         }
-        public async Task<Car> DeleteByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<Car> DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             await using(var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {

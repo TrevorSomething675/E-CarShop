@@ -19,21 +19,19 @@ namespace E_CarShop.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById([Required][FromHeader] int id, CancellationToken cancellationToken = default)
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            int.TryParse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value, out int userId);
             return (await _mediator.Send(new GetCarByIdQuery(id, userId), cancellationToken)).ToActionResult();
         }
         [HttpGet]
-
         public async Task<IActionResult> GetPageCars([FromHeader] int pageNumber = 1, CancellationToken cancellationToken = default)
         {
-            var userId = Convert.ToInt32(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
+            int.TryParse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value, out int userId);
             return (await _mediator.Send(new GetPageCarsQuery(pageNumber, userId), cancellationToken)).ToActionResult();
         }
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
-            var userId = Convert.ToInt32(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value);
-            userId = 1;
+            int.TryParse(_httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Id")?.Value, out int userId);
             return (await _mediator.Send(new GetCarsQuery(userId), cancellationToken)).ToActionResult();
         }
         [HttpPost]
