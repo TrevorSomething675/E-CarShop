@@ -1,7 +1,9 @@
+import Register from "./../../Components/Register/Register.jsx";
+
 const RegisterPage = () => {
-    return <div>
-        <h2>Register page</h2>
-    </div>
+    return <>
+        <Register />
+    </>
 }
 
 export default RegisterPage;

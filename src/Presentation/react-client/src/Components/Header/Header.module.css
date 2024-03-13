@@ -10,11 +10,11 @@ a:hover{
 }
 
 .header{
+    color: var(--light-orange-color);
+    background-color: var(--dark-gray-color);
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--dark-gray-color);
-    color: var(--light-orange-color);
     border-bottom: 2px solid;
 }
 

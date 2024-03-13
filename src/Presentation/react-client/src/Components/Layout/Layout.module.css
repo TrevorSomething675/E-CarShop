@@ -1,7 +1,7 @@
 .main{
+    flex-direction: column;
     display: flex;
     flex: 1;
-    flex-direction: column;
     min-height: 100%;
     color: var(--light-text-color);
     background-color: var(--light-gray-color);

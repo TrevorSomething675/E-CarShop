@@ -8,8 +8,8 @@ const Car = ({Id, Name, Description, Price, Images}) =>{
     });
 
     return <div className="col-xxl-3 col-xl-4 col-md-6 col-sm-12 ">
-    <div className={`${styles.productContainer} m-1 p-1`}>
-        <img src={`data:image/png;base64,${Images[0].Base64String}`} className={styles.productImage}/>
+    <div className={`${styles.carContainer} m-1 p-1`}>
+        <img src={`data:image/png;base64,${Images[0].Base64String}`} className={styles.carImage}/>
         <div>
             {Id}
         </div>
@@ -18,7 +18,7 @@ const Car = ({Id, Name, Description, Price, Images}) =>{
         </div>
         <h1>
         </h1>
-        <div className={`${styles.productDescription} text-break`}>
+        <div className={`${styles.carDescription} text-break`}>
             {Description}
         </div>
         <div>

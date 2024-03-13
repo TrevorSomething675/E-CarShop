@@ -59,34 +59,3 @@
     transition: 0.2s;
     color: var(--light-orange-color);
 }
-
-.formFooter{
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    width: 18rem;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    background-color: var(--dark-gray-color);
-}
-
-.formFooterButton{
-    text-align: center;
-    transition: 0.2s;
-    color: var(--light-text-color);
-    background-color: var(--light-green-color);
-    border-radius: 5px;
-    padding: 0.25rem 0.25rem;
-}
-
-.formFooterButton:hover{
-    transition: 0.2s;
-    color: var(--light-text-color);
-    background-color: var(--dark-green-color);
-}
-
-.description{
-    text-align:center;
-}
