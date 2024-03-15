@@ -1,6 +1,6 @@
 ﻿using E_CarShop.Application.Repositories;
 using Ardalis.Result.FluentValidation;
-using E_CarShop.Core.ReponseModels;
+using E_CarShop.Core.ResponseModels;
 using E_CarShop.Core.Models;
 using FluentValidation;
 using Ardalis.Result;

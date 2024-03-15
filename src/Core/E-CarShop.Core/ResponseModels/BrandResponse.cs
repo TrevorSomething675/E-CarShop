@@ -1,6 +1,6 @@
 ﻿using E_CarShop.Core.Models;
 
-namespace E_CarShop.Core.ReponseModels
+namespace E_CarShop.Core.ResponseModels
 {
     public class BrandResponse : BaseResponse
     {

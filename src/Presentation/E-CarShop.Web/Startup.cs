@@ -1,4 +1,5 @@
-﻿using E_CarShop.Application.Repositories;
+﻿using E_CarShop.Core.JsonConverterConfiguration;
+using E_CarShop.Application.Repositories;
 using E_CarShop.Core.ConfigurationModels;
 using E_CarShop.Infrastructure.Services;
 using E_CarShop.DataBase.Repositories;
@@ -8,7 +9,6 @@ using E_CarShop.DataBase.Entities;
 using E_CarShop.DataBase;
 using System.Reflection;
 using FluentValidation;
-using E_CarShop.Core.JsonConverterConfiguration;
 
 namespace E_CarShop.Web
 {
@@ -31,6 +31,7 @@ namespace E_CarShop.Web
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICarsRepository, CarsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
 
             services.AddHttpContextAccessor();
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetAssembly(typeof(Infrastructure.AssemblyMarker))));

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 
 namespace E_CarShop.DataBase.Repositories
 {

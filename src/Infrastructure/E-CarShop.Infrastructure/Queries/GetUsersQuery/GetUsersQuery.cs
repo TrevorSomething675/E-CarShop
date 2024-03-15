@@ -1,4 +1,4 @@
-﻿using E_CarShop.Core.ReponseModels;
+﻿using E_CarShop.Core.ResponseModels;
 using Ardalis.Result;
 using MediatR;
 

@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using E_CarShop.Core.ReponseModels;
+using E_CarShop.Core.ResponseModels;
 using System.Text.Json;
 
 namespace E_CarShop.Core.JsonConverterConfiguration

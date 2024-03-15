@@ -1,4 +1,4 @@
-﻿using E_CarShop.Core.ReponseModels;
+﻿using E_CarShop.Core.ResponseModels;
 using E_CarShop.DataBase.Entities;
 using E_CarShop.Core.Models;
 using AutoMapper;

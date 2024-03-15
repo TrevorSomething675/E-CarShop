@@ -1,7 +1,6 @@
-﻿using E_CarShop.Core.JsonConverterConfiguration;
-using System.Text.Json.Serialization;
+﻿using MediatR;
 
-namespace E_CarShop.Core.ReponseModels
+namespace E_CarShop.Core.ResponseModels
 {
     public class CarResponse : BaseResponse
     {
