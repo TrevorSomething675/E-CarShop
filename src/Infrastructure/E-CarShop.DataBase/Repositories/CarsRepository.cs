@@ -17,9 +17,9 @@ namespace E_CarShop.DataBase.Repositories
         {
             await using (var context = await _dbContextFactory.CreateDbContextAsync(cancellationToken))
             {
-                var carEntity = context.Cars
+                var carEntity = await context.Cars
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(cancellationToken);
+                    .FirstOrDefaultAsync(car => car.Id == id,cancellationToken);
                         
                 return _mapper.Map<Car>(carEntity);
             }

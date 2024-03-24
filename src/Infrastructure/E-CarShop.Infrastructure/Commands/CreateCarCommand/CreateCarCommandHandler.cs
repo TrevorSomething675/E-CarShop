@@ -9,7 +9,7 @@ using MediatR;
 
 namespace E_CarShop.Infrastructure.Commands.CreateCarCommand
 {
-    public class CreateCarCommandHandler( //проверить!!! TO DO
+    public class CreateCarCommandHandler(
         IMapper mapper,
         ICarsRepository carsRepository,
         IBrandRepository brandRepository,
@@ -27,7 +27,7 @@ namespace E_CarShop.Infrastructure.Commands.CreateCarCommand
             if (!validationResult.IsValid)
                 return Result<CarResponse>.Invalid(validationResult.AsErrors());
 
-            var carToCreate = _mapper.Map<Car>(request);
+            var carToCreate = _mapper.Map<Car>(request.CarToCreate);
             var brand = await _brandRepository.GetBrandById(carToCreate.BrandId);
             if (brand == null)
                 return Result<CarResponse>.NotFound($"Бренд с Id:{carToCreate.BrandId} не найден");

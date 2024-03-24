@@ -1,4 +1,6 @@
-﻿using E_CarShop.Infrastructure.Commands.CreateCarCommand;
+﻿using E_CarShop.Infrastructure.Commands.DeleteCarByIdCommand;
+using E_CarShop.Infrastructure.Commands.UpdateCarCommand;
+using E_CarShop.Infrastructure.Commands.CreateCarCommand;
 using E_CarShop.Infrastructure.Queries.GetPageCarsQuery;
 using E_CarShop.Infrastructure.Queries.GetCarByIdQuery;
 using E_CarShop.Infrastructure.Queries.GetCarsQuery;
@@ -41,14 +43,14 @@ namespace E_CarShop.Web.Controllers
             return (await _mediator.Send(command, cancellationToken)).ToActionResult();
         }
         [HttpPut]
-        public async Task<IActionResult> Update()
+        public async Task<IActionResult> Update([FromBody] UpdateCarCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok();
+            return (await _mediator.Send(command, cancellationToken)).ToActionResult();
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> Delete([Required][FromHeader] int id, CancellationToken cancellationToken = default)
         {
-            return Ok();
+            return (await _mediator.Send(new DeleteCarByIdCommand(id), cancellationToken)).ToActionResult();
         }
     }
 }

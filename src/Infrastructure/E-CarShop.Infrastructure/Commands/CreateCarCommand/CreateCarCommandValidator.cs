@@ -7,19 +7,24 @@ namespace E_CarShop.Infrastructure.Commands.CreateCarCommand
     {
         public CreateCarCommandValidator() 
         {
-            RuleFor(command => command.Name)
+            ClassLevelCascadeMode = CascadeMode.Stop;
+
+            RuleFor(command => command.CarToCreate)
                 .NotNull().NotEmpty();
 
-            RuleFor(command => command.Color)
+            RuleFor(command => command.CarToCreate.Name)
                 .NotNull().NotEmpty();
 
-            RuleFor(command => command.Description)
+            RuleFor(command => command.CarToCreate.Color)
                 .NotNull().NotEmpty();
 
-            RuleFor(command => command.Price)
+            RuleFor(command => command.CarToCreate.Description)
                 .NotNull().NotEmpty();
 
-            RuleFor(command => command.BrandId)
+            RuleFor(command => command.CarToCreate.Price)
+                .NotNull().NotEmpty();
+
+            RuleFor(command => command.CarToCreate.BrandId)
                 .Must(CheckField.IsNumber)
                 .NotNull().NotEmpty();
         }

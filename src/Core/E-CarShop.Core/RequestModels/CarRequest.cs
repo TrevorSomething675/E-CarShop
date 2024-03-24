@@ -4,6 +4,7 @@ namespace E_CarShop.Core.RequestModels
 {
     public class CarRequest
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Color { get; set; }
         public bool IsVisible { get; set; }
