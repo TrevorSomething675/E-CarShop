@@ -1,3 +1,4 @@
+import $api from "../../Middlewares/JWTtokenMiddleware.js";
 import DiContainer from "../../Extensions/DI-container.js";
 import { useEffect, useState } from "react";
 import Car from "./../Car/Car.jsx";
@@ -6,7 +7,7 @@ import axios from "axios";
 
 const Cars = ({pageNumber}) =>{
     useEffect(() => {
-        axios.get(`${DiContainer.CarShopUrl}Cars/GetPageCars`, {
+        $api.get('Cars/GetPageCars', {
             headers:{
                 pageNumber
             }
